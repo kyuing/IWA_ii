@@ -1,0 +1,23 @@
+{
+  "name": "iwa_ii",
+  "version": "0.0.1",
+  "description": "IWA semester 6, year 3, CCT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyuing/IWA_ii.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyuing/IWA_ii/issues"
+  },
+  "homepage": "https://github.com/kyuing/IWA_ii#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
