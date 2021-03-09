@@ -24,31 +24,10 @@ bodyParser = require('body-parser');
 var app = express();
 var port = 8000;
 
-app.use(bodyParser.json())
-
-/**
- * An error found is that
- * the following function work only
- * when the root path is specified as follows:
- * 
-  app.get('/', (req, res) => {
-      res.json({message: 'Hello BScBest!', data: [
-          req.params.foo,
-          req.params.bar
-      ]});
-  });
-
- * In other words, retrieving a run time JSON key-value data based on '/hello/:foo/:bar' on the browser
- * does not work, showing "Cannot GET /"
- * 
- * It can be an error on Windows 10 based gitpod environment or such a static path is needed 
- */
-app.get('/hello/:foo/:bar', (req, res) => {
-    res.json({message: 'Hello BScBest!', data: [
-        req.params.foo,
-        req.params.bar
-    ]});
-});
+// Middlewares 
+app.use(bodyParser.json());
+app.use(logger('dev'));   // app.use(logger('tiny'));
+app.use(require('./routes'));  //import routes.js
 
 
 /*********************************************************************************
