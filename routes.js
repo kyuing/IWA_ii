@@ -1,17 +1,17 @@
 const express = require('express'),
 router = express.Router();
 
-var itemCtrl = require('./item-controller');  //ref to item-controller.js
-//userCtrl = require('./user-controller');
+var itemCtrl = require('./item-controller'),  //ref to item-controller.js
+userCtrl = require('./user-controller');  //ref to user-controller.js
 
+// ./item-controller
 router.get('/hello', itemCtrl.getWorld);
-
 router.get('/hello/:foo/:bar', itemCtrl.getWorldParams);
-
 router.post('/hello', itemCtrl.postWorld);
 
-// router.post('/users', userCtrl.createUser);
-// router.get('/users', userCtrl.getUsers);
+// ./user-controller
+router.post('/users', userCtrl.createUser);
+router.get('/users', userCtrl.getUsers);
 
 /* In index.js, which can better be named server.js, 
  * the code 
