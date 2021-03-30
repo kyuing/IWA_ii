@@ -4,6 +4,7 @@
  * npm install --save nodemon / npm install -g nodemon / npm install -g --save nodemon
  * npm i --save axios
  * npm i --save morgan cors express body-parser
+ * npm i --save multer fs path del
  * 
  * [To run index.js, on terminal based on pwd is /] 
  * npm start
@@ -59,11 +60,7 @@ let users = []; // names of users will be stored here
 })();
 ********************************************************************/
 
-/***********************************************
-app.listen(port, function(err){
-    console.log('Listening on port: ' + port);
-});
-***********************************************/
+
 
 /***********************************************************************************
 //const dbURI = "mongodb://localhost/test";
@@ -79,7 +76,13 @@ mongoose.connection.on('connected', () => {
 });
 ***********************************************************************************/
 
+app.listen(port, function(err){
+    console.log('Listening on port: ' + port);
+});
+
 const dbURI = "mongodb://localhost/test";
+// https://27017-amber-spoonbill-0ngirk36.ws-eu03.gitpod.io/
+// const dbURI = "27017-amber-spoonbill-0ngirk36.ws-eu03.gitpod.io/";
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then((result) => console.log('connected to db'))

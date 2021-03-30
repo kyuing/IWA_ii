@@ -1,17 +1,35 @@
 const express = require('express'),
-router = express.Router();
+router = express.Router(),
+multer = require('multer'),
+upload = multer({ dest: module.exports.UPLOAD_PATH });
 
 var itemCtrl = require('./item-controller'),  //ref to item-controller.js
-userCtrl = require('./user-controller');  //ref to user-controller.js
+userCtrl = require('./user-controller'),  //ref to user-controller.js
+imageCtrl = require('./image-controller');
+
+
+
 
 // ./item-controller
 router.get('/hello', itemCtrl.getWorld);
 router.get('/hello/:foo/:bar', itemCtrl.getWorldParams);
 router.post('/hello', itemCtrl.postWorld);
 
-// ./user-controller
-router.post('/users', userCtrl.createUser);
-router.get('/users', userCtrl.getUsers);
+// ./user-controller   <--wk06 and wk07
+router.post('/users', userCtrl.createUser); //create a user
+router.get('/users', userCtrl.getUsers);  //get all users
+router.get('/users/:id', userCtrl.getUser);  //get a user
+router.put('/users/:id', userCtrl.updateUser);  //update a user
+router.delete('/users/:id', userCtrl.deleteUser);  //delete a user
+
+// ./image-controller.js    <--wk07 and wk08
+router.post('/images', upload.single('image'), imageCtrl.uploadImage);
+router.get('/images', imageCtrl.getImages);
+router.get('/images/:id', imageCtrl.getImage);
+router.delete('/images/:id', imageCtrl.deleteImage);
+
+
+
 
 /* In index.js, which can better be named server.js, 
  * the code 
@@ -30,3 +48,4 @@ router.get('/users', userCtrl.getUsers);
  *   as needed at UI or at POSTMAN API 
  */
 module.exports = router;  // export router 
+module.exports.UPLOAD_PATH = 'uploads';
