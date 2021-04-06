@@ -28,7 +28,7 @@ var port = 8000;
 
 // Middlewares 
 app.use(bodyParser.json());
-app.use(logger('dev'));   // app.use(logger('tiny'));
+app.use(logger('tiny'));   // app.use(logger('dev'));
 app.use(require('./routes'));  //import routes.js
 
 

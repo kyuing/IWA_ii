@@ -1,6 +1,6 @@
-var UPLOAD_PATH = require('./routes').UPLOAD_PATH;
-var Image = require('./models/image');
-var path = require('path'),
+const UPLOAD_PATH = require('./routes').UPLOAD_PATH,
+Image = require('./models/image'),
+path = require('path'),
 fs = require('fs'),
 del = require('del');
 
@@ -14,7 +14,7 @@ exports.uploadImage = function(req, res) {
         if (err) {
             return res.sendStatus(400);
         }
-        res.status(201).send({ newImage })
+        res.status(201).send({ newImage } )
     });
 };
 
@@ -48,6 +48,16 @@ exports.getImage = function(req, res) {
         res.setHeader('Content-Type', 'image/jpeg');
         fs.createReadStream(path.join(UPLOAD_PATH, image.filename)).pipe(res);
     });
+};
+
+//delete images
+exports.deleteImages = function(req, res) {
+  Image.deleteMany({}, function (err, images) {
+    if (err) {
+      res.status(400).json(err);
+    }
+    res.json(images);
+  });
 };
 
 //delete an image
