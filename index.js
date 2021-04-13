@@ -5,6 +5,7 @@
  * npm i --save axios
  * npm i --save morgan cors express body-parser
  * npm i --save multer fs path del
+ * npm i --save dotenv
  * 
  * [To run index.js, on terminal based on pwd is /] 
  * npm start
@@ -21,12 +22,14 @@ logger = require('morgan'),
 cors = require('cors'),
 express = require('express'),
 bodyParser = require('body-parser'),
+dotenv = require('dotenv'),
 mongoose = require('mongoose'); //mongoose module to use mongodb
 
 var app = express();
 var port = 8000;
 
 // Middlewares 
+dotenv.config();
 app.use(bodyParser.json());
 app.use(logger('tiny'));   // app.use(logger('dev'));
 app.use(require('./routes'));  //import routes.js
@@ -80,9 +83,8 @@ app.listen(port, function(err){
     console.log('Listening on port: ' + port);
 });
 
-const dbURI = "mongodb://localhost/test";
-// https://27017-amber-spoonbill-0ngirk36.ws-eu03.gitpod.io/
-// const dbURI = "27017-amber-spoonbill-0ngirk36.ws-eu03.gitpod.io/";
+// const dbURI = "mongodb://localhost/test";
+const dbURI = process.env.DB_URL;
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then((result) => console.log('connected to db'))
